@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
 }
 
 
-const{username, email, password}= value;
+const{username, email, password,role}= value;
 
 const existUser = await User.findOne({email});
 
@@ -45,11 +45,13 @@ if (existUser) {
    const newUser = await User.create({
     username,
     email,
-    password:hashPassword
+    password:hashPassword,
+    role
    });
 // Response
     res.status(201).json({
       msg: "Done Create Account",
+      user:newUser
     });
   } catch (error) {
     next(error);
@@ -93,6 +95,7 @@ if (!matchPassword) {
 const token = jwt.sign (
     {
         id:user._id,
+        role:user.role
     },
     process.env.JWT_SK,
     {
@@ -100,9 +103,6 @@ const token = jwt.sign (
     },
 );
 
-
-
-// Response
 
     res.status(200).json({
       msg: "Login Success",
