@@ -27,7 +27,7 @@ const register = async (req, res, next) => {
 }
 
 
-const{username, email, password}= value;
+const{userName, email, password,role}= value;
 
 const existUser = await User.findOne({email});
 
@@ -43,9 +43,10 @@ if (existUser) {
 // Insert into DB
 
    const newUser = await User.create({
-    username,
+    name:userName,
     email,
-    password:hashPassword
+    password:hashPassword,
+    role: role || "cashier"
    });
 // Response
     res.status(201).json({
@@ -92,7 +93,7 @@ if (!matchPassword) {
 //Generate Token
 const token = jwt.sign (
     {
-        id:user._id,
+        id:user._id, role: user.role
     },
     process.env.JWT_SK,
     {

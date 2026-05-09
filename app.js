@@ -1,11 +1,16 @@
+require("dotenv").config()
 const express = require("express")
 const app = express()
-require("dotenv").config()
+const cors = require ('cors')
+
+app.use(cors({
+      origin: 'http://localhost:5173',
+      Credential: true
+
+}))
 
 app.use(express.json())
 const mongoose = require("mongoose")    
-
-
 
 
 async function dbConnection(){
@@ -16,10 +21,13 @@ async function dbConnection(){
         console.log("server error")
     }
 }
+dbConnection();
 const authRoutes = require("./routes/authRoutes");
 app.use("/api", authRoutes);
 
-dbConnection();
+const IngredientsRouter = require("./routes/IngredientsRouter")
+app.use("/api/ingredients",IngredientsRouter)
+
 
 const port = process.env.PORT || 3000
 
