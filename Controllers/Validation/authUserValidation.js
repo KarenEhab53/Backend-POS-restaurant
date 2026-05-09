@@ -13,6 +13,18 @@ const userLoginSchema = joi.object({
     password: joi.string().min(8).max(30).required()
 })
 
+
+
+const ingredientSchema = joi.object({
+    name: joi.string().trim().required(),
+    quantity: joi.number().min(0).default(0).required(),
+    unit: joi.string().valid('kg', 'g', 'liter', 'piece').required(),
+    creditSystem: joi.number().required()
+});
+
+
+
 module.exports = {
     userLoginSchema,
-    userRegisterSchema}
+    userRegisterSchema ,
+    ingredientSchema}
