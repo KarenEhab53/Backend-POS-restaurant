@@ -28,6 +28,8 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api", authRoutes);
 const categoryRoutes=require('./routes/CategoryRoutes')
 app.use('/api',categoryRoutes)
+const productRoutes=require('./routes/productRoutes')
+app.use('/api',productRoutes)
 
 const IngredientsRouter = require("./routes/IngredientsRouter")
 app.use("/api/ingredients",IngredientsRouter)
