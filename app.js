@@ -32,7 +32,10 @@ const productRoutes=require('./routes/productRoutes')
 app.use('/api',productRoutes)
 
 const IngredientsRouter = require("./routes/IngredientsRouter")
-app.use("/api/ingredients",IngredientsRouter)
+app.use("/api",IngredientsRouter)
+
+const cartRoutes = require("./routes/cartRoutes"); 
+app.use("/api", cartRoutes);
 
 
 const port = process.env.PORT || 3000

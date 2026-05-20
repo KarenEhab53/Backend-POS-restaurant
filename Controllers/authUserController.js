@@ -25,10 +25,10 @@ const register = async (req, res, next) => {
             msg: error.details.map((err)=> err.message),
          });
 }
+    
 
 
-
-const{username, email, password,role}= value;
+const{userName, email, password,role}= value;
 
 
 
